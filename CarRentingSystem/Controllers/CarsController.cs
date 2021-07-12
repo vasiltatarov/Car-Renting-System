@@ -1,25 +1,25 @@
 ﻿namespace CarRentingSystem.Controllers
 {
     using System.Linq;
-    using System.Collections.Generic;
-
-    using CarRentingSystem.Data;
-    using CarRentingSystem.Data.Models;
-    using CarRentingSystem.Models.Cars;
 
     using Microsoft.AspNetCore.Mvc;
 
+    using CarRentingSystem.Services;
+    using CarRentingSystem.Data;
+    using CarRentingSystem.Models.Cars;
+
     public class CarsController : Controller
     {
+        private readonly ICarService carService;
         private readonly CarRentingDbContext data;
 
-        public CarsController(CarRentingDbContext data)
+        public CarsController(ICarService carService, CarRentingDbContext data)
         {
-            this.data = data;
+            this.carService = carService;
         }
 
         public IActionResult Add()
-            => this.View(new AddCarFormModel { Categories = this.GetCarCategories() });
+            => this.View(new AddCarFormModel { Categories = this.carService.GetCarCategories() });
 
         [HttpPost]
         public IActionResult Add(AddCarFormModel car)
@@ -31,51 +31,16 @@
 
             if (!this.ModelState.IsValid)
             {
-                car.Categories = this.GetCarCategories();
+                car.Categories = this.carService.GetCarCategories();
                 return this.View(car);
             }
 
-            var carData = new Car
-            {
-                Brand = car.Brand,
-                Description = car.Description,
-                ImageUrl = car.ImageUrl,
-                Model = car.Model,
-                Year = car.Year,
-                CategoryId = car.CategoryId,
-            };
-
-            this.data.Cars.Add(carData);
-            this.data.SaveChanges();
+            this.carService.Add(car.Brand, car.Model, car.ImageUrl, car.Description, car.Year, car.CategoryId);
 
             return this.RedirectToAction("Index", "Home");
         }
 
         public IActionResult All()
-        {
-            var cars = this.data
-                .Cars
-                .Select(x => new CarViewModel
-                {
-                    Brand = x.Brand,
-                    Category = x.Category.Name,
-                    Description = x.Description,
-                    ImageUrl = x.ImageUrl,
-                    Model = x.Model,
-                    Year = x.Year,
-                })
-                .ToList();
-
-            return this.View(cars);
-        }
-
-        private IEnumerable<CarCategoryViewModel> GetCarCategories()
-            => this.data.Categories
-                .Select(x => new CarCategoryViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                })
-                .ToList();
+            => this.View(this.carService.GetAll());
     }
 }

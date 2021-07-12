@@ -2,6 +2,7 @@ namespace CarRentingSystem
 {
     using CarRentingSystem.Infrastructure;
     using CarRentingSystem.Data;
+    using CarRentingSystem.Services;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -37,6 +38,8 @@ namespace CarRentingSystem
                 .AddEntityFrameworkStores<CarRentingDbContext>();
 
             services.AddControllersWithViews();
+
+            services.AddTransient<ICarService, CarService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
