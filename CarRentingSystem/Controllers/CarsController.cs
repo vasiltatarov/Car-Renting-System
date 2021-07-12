@@ -51,6 +51,24 @@
             return this.RedirectToAction("Index", "Home");
         }
 
+        public IActionResult All()
+        {
+            var cars = this.data
+                .Cars
+                .Select(x => new CarViewModel
+                {
+                    Brand = x.Brand,
+                    Category = x.Category.Name,
+                    Description = x.Description,
+                    ImageUrl = x.ImageUrl,
+                    Model = x.Model,
+                    Year = x.Year,
+                })
+                .ToList();
+
+            return this.View(cars);
+        }
+
         private IEnumerable<CarCategoryViewModel> GetCarCategories()
             => this.data.Categories
                 .Select(x => new CarCategoryViewModel

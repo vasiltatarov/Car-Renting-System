@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CarViewModel>
+
+@{
+    this.ViewData["Title"] = "All Cars";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row py-2">
+                        @foreach (var car in Model)
+                        {
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="@car.ImageUrl" alt="Card image">
+                                    <div class="card-body">
+                                        <h6 class="card-text">Category: @car.Category</h6>
+                                        <h4 class="card-title">
+                                            @car.Year @car.Brand @car.Model
+                                        </h4>
+                                        <h5 class="card-text">@car.Description</h5>
+
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">44,114 Km</li>
+                                            <li class="list-inline-item">Petrol</li>
+                                            <li class="list-inline-item">Gurugram</li>
+                                        </ul>
+                                        <button type="button" class="btn btn-outline-danger">Contact Sellers</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
