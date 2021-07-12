@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using CarRentingSystem.Models.Cars;
-
-namespace CarRentingSystem.Services
+﻿namespace CarRentingSystem.Services
 {
+    using System.Collections.Generic;
+    using CarRentingSystem.Models.Cars;
+
     public interface ICarService
     {
         void Add(string brand, string model, string imageUrl, string description, int year, int categoryId);

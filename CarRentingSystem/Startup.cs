@@ -40,6 +40,7 @@ namespace CarRentingSystem
             services.AddControllersWithViews();
 
             services.AddTransient<ICarService, CarService>();
+            services.AddTransient<ICategoryService, CategoryService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

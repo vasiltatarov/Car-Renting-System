@@ -1,21 +1,19 @@
 ﻿namespace CarRentingSystem.Controllers
 {
-    using System.Linq;
-
     using Microsoft.AspNetCore.Mvc;
 
     using CarRentingSystem.Services;
-    using CarRentingSystem.Data;
     using CarRentingSystem.Models.Cars;
 
     public class CarsController : Controller
     {
         private readonly ICarService carService;
-        private readonly CarRentingDbContext data;
+        private readonly ICategoryService categoryService;
 
-        public CarsController(ICarService carService, CarRentingDbContext data)
+        public CarsController(ICarService carService, ICategoryService categoryService)
         {
             this.carService = carService;
+            this.categoryService = categoryService;
         }
 
         public IActionResult Add()
@@ -24,7 +22,7 @@
         [HttpPost]
         public IActionResult Add(AddCarFormModel car)
         {
-            if (!this.data.Categories.Any(x => x.Id == car.CategoryId))
+            if (!this.categoryService.IsCategoryExist(car.CategoryId))
             {
                 this.ModelState.AddModelError(nameof(car.CategoryId), "Category does not exits.");
             }
