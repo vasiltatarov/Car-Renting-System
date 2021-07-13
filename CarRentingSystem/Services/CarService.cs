@@ -45,11 +45,25 @@
                     Id = x.Id,
                     Brand = x.Brand,
                     Category = x.Category.Name,
-                    Description = x.Description,
                     ImageUrl = x.ImageUrl,
                     Model = x.Model,
                     Year = x.Year,
                 })
                 .ToList();
+
+        public CarDetailsModel GetCarDetails(int id)
+            => this.data.Cars
+                .Where(x => x.Id == id)
+                .Select(x => new CarDetailsModel
+                {
+                    Id = x.Id,
+                    Brand = x.Brand,
+                    Category = x.Category.Name,
+                    ImageUrl = x.ImageUrl,
+                    Model = x.Model,
+                    Year = x.Year,
+                    Description = x.Description,
+                })
+                .FirstOrDefault();
     }
 }

@@ -42,8 +42,6 @@
             => this.View(this.carService.GetAll());
 
         public IActionResult Details(int id)
-        {
-            return this.View();
-        }
+            => this.View(this.carService.GetCarDetails(id));
     }
 }

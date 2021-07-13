@@ -1,6 +1,6 @@
 ﻿namespace CarRentingSystem.Models.Cars
 {
-    public class CarViewModel
+    public class CarDetailsModel
     {
         public int Id { get; set; }
 
@@ -9,6 +9,8 @@
         public string Model { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public string Description { get; set; }
 
         public int Year { get; set; }
 

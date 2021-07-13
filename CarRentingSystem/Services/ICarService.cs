@@ -10,5 +10,7 @@
         IEnumerable<CarCategoryViewModel> GetCarCategories();
 
         IEnumerable<CarViewModel> GetAll();
+
+        CarDetailsModel GetCarDetails(int id);
     }
 }
