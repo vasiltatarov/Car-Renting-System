@@ -40,5 +40,10 @@
 
         public IActionResult All()
             => this.View(this.carService.GetAll());
+
+        public IActionResult Details(int id)
+        {
+            return this.View();
+        }
     }
 }

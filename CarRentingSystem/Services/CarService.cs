@@ -42,6 +42,7 @@
             => this.data.Cars
                 .Select(x => new CarViewModel
                 {
+                    Id = x.Id,
                     Brand = x.Brand,
                     Category = x.Category.Name,
                     Description = x.Description,
