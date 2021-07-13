@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using CarRentingSystem.Models.Cars;
+    using CarRentingSystem.Models.Home;
 
     public interface ICarService
     {
@@ -10,6 +11,8 @@
         IEnumerable<CarCategoryViewModel> GetCarCategories();
 
         IEnumerable<CarViewModel> GetAll();
+
+        IndexViewModel GetHomeCarsInfo();
 
         CarDetailsModel GetCarDetails(int id);
     }

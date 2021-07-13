@@ -1,13 +1,20 @@
 ﻿namespace CarRentingSystem.Controllers
 {
-    using CarRentingSystem.Models;
-    using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
+
+    using Microsoft.AspNetCore.Mvc;
+    using CarRentingSystem.Models;
+    using CarRentingSystem.Services;
 
     public class HomeController : Controller
     {
+        private readonly ICarService carService;
+
+        public HomeController(ICarService carService)
+            => this.carService = carService;
+
         public IActionResult Index()
-            => View();
+            => View(this.carService.GetHomeCarsInfo());
 
         public IActionResult Privacy()
             => View();

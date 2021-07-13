@@ -78,3 +78,7 @@ body {
 .card-image {
     height: 250px;
 }
+
+.carousel-image {
+    height: 700px;
+}

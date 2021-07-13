@@ -6,6 +6,7 @@
     using CarRentingSystem.Data;
     using CarRentingSystem.Data.Models;
     using CarRentingSystem.Models.Cars;
+    using CarRentingSystem.Models.Home;
 
     public class CarService : ICarService
     {
@@ -39,7 +40,9 @@
             .ToList();
 
         public IEnumerable<CarViewModel> GetAll()
-            => this.data.Cars
+            => this.data
+                .Cars
+                .OrderByDescending(x => x.Id)
                 .Select(x => new CarViewModel
                 {
                     Id = x.Id,
@@ -50,6 +53,27 @@
                     Year = x.Year,
                 })
                 .ToList();
+
+        public IndexViewModel GetHomeCarsInfo()
+            => new IndexViewModel
+            {
+                TotalCars = this.data.Cars.Count(),
+                TotalRents = 0,
+                TotalUsers = 0,
+                Cars = this.data
+                    .Cars
+                    .OrderByDescending(x => x.Id)
+                    .Select(x => new CarIndexViewModel
+                    {
+                        Id = x.Id,
+                        Brand = x.Brand,
+                        ImageUrl = x.ImageUrl,
+                        Model = x.Model,
+                        Year = x.Year,
+                    })
+                    .Take(3)
+                    .ToList(),
+            };
 
         public CarDetailsModel GetCarDetails(int id)
             => this.data.Cars
