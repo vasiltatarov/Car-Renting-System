@@ -1,11 +1,41 @@
-﻿@model IEnumerable<CarViewModel>
+﻿@model AllCarsViewModel
 
 @{
     this.ViewData["Title"] = "All Cars";
 }
 
+<div class="container m-3">
+    <form method="get">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label asp-for="SearchTerms"></label>
+                <input asp-for="SearchTerms" class="form-control"  placeholder="BMW E90 ...">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="Brand"></label>
+                <select asp-for="Brand" class="form-control">
+                    <option value="">All</option>
+                    @foreach (var brand in Model.Brands)
+                    {
+                        <option value="@brand">@brand</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="Sorting"></label>
+                <select asp-for="Sorting" class="form-control">
+                    <option value="0">Date Created</option>
+                    <option value="1">Year</option>
+                    <option value="2">Brand and Model</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+</div>
+
 <div class="row">
-    @foreach (var car in Model)
+    @foreach (var car in Model.Cars)
     {
         <div class="col-md-4">
             <div class="card mb-3 card-size">
