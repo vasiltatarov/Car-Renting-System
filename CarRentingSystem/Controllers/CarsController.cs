@@ -69,6 +69,8 @@
             };
 
             var cars = carsQuery
+                .Skip((query.CurrentPage - 1) * AllCarsViewModel.CarsPerPage)
+                .Take(AllCarsViewModel.CarsPerPage)
                 .Select(x => new CarViewModel
                 {
                     Id = x.Id,
@@ -85,6 +87,8 @@
                 .OrderBy(x => x)
                 .ToList();
 
+            var totalCars = this.data.Cars.Count();
+
             return this.View(new AllCarsViewModel
             {
                 Cars = cars,
@@ -92,6 +96,8 @@
                 Brand = query.Brand,
                 SearchTerms = query.SearchTerms,
                 Sorting = query.Sorting,
+                CurrentPage = query.CurrentPage,
+                TotalCars = totalCars,
             });
         }
 
