@@ -10,7 +10,7 @@
 
         IEnumerable<CarCategoryViewModel> GetCarCategories();
 
-        IEnumerable<CarViewModel> GetAll();
+        AllCarsViewModel All(string searchTerms, string brand, CarSorting sorting, int currentPage);
 
         IndexViewModel GetHomeCarsInfo();
 

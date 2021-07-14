@@ -64,7 +64,10 @@
             <a class="page-link"
                asp-controller="Cars"
                asp-action="All"
-               asp-route-currentPage="@previousPage">
+               asp-route-currentPage="@previousPage"
+               asp-route-brand="@Model.Brand"
+               asp-route-searchTerms="@Model.SearchTerms"
+               asp-route-sorting="@((int)Model.Sorting)">
                 Previous
             </a>
         </li>
@@ -74,7 +77,10 @@
                 <a class="page-link"
                    asp-controller="Cars"
                    asp-action="All"
-                   asp-route-currentPage="@(Model.CurrentPage - 1)">
+                   asp-route-currentPage="@(Model.CurrentPage - 1)"
+                   asp-route-brand="@Model.Brand"
+                   asp-route-searchTerms="@Model.SearchTerms"
+                   asp-route-sorting="@((int)Model.Sorting)">
                     @(Model.CurrentPage - 1)
                 </a>
             </li>
@@ -83,7 +89,10 @@
             <a class="page-link"
                asp-controller="Cars"
                asp-action="All"
-               asp-route-currentPage="@Model.CurrentPage">
+               asp-route-currentPage="@Model.CurrentPage"
+               asp-route-brand="@Model.Brand"
+               asp-route-searchTerms="@Model.SearchTerms"
+               asp-route-sorting="@((int)Model.Sorting)">
                 @Model.CurrentPage
             </a>
         </li>
@@ -93,7 +102,10 @@
                 <a class="page-link"
                    asp-controller="Cars"
                    asp-action="All"
-                   asp-route-currentPage="@(Model.CurrentPage + 1)">
+                   asp-route-currentPage="@(Model.CurrentPage + 1)"
+                   asp-route-brand="@Model.Brand"
+                   asp-route-searchTerms="@Model.SearchTerms"
+                   asp-route-sorting="@((int)Model.Sorting)">
                     @(Model.CurrentPage + 1)
                 </a>
             </li>
@@ -102,7 +114,10 @@
             <a class="page-link"
                asp-controller="Cars"
                asp-action="All"
-               asp-route-currentPage="@(Model.CurrentPage + 1)">
+               asp-route-currentPage="@(Model.CurrentPage + 1)"
+               asp-route-brand="@Model.Brand"
+               asp-route-searchTerms="@Model.SearchTerms"
+               asp-route-sorting="@((int)Model.Sorting)">
                 Next
             </a>
         </li>
